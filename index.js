@@ -4,6 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/index.js";
 
+import userRouter from "./routes/user.routes.js";
+
 dotenv.config({
   path: "./.env",
 });
@@ -28,6 +30,8 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+app.use("/api/", userRouter);
 
 app.listen(PORT, () => {
   console.log(`app listening on port http://localhost:${PORT}`);
