@@ -1,4 +1,6 @@
 import mongoose, { Schema } from "mongoose";
+import { User } from "./user.model.js";
+import { Comment } from "./comment.model.js";
 
 const postSchema = new Schema(
   {
@@ -25,17 +27,17 @@ const postSchema = new Schema(
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: User,
       },
     ],
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: Comment,
       },
     ],
   },
   { timestamps: true }
 );
 
-export const Post = mongoose.Model("Post", postSchema);
+export const Post = mongoose.model("Post", postSchema);
