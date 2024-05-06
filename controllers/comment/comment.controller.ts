@@ -11,6 +11,7 @@ export const createComment = async (req: Request, res: Response) => {
         .status(401)
         .json({ message: "Unauthorized: User not logged in." });
     }
+
     const comment = await prismaClient.comment.create({
       data: {
         text,
@@ -50,6 +51,7 @@ export const updateComment = async (req: Request, res: Response) => {
         .status(401)
         .json({ message: "Unauthorized: User not logged in." });
     }
+
     const comment = await prismaClient.comment.update({
       where: {
         id: parseInt(commentId),
@@ -74,6 +76,7 @@ export const deleteComment = async (req: Request, res: Response) => {
         .status(401)
         .json({ message: "Unauthorized: User not logged in." });
     }
+
     const comment = await prismaClient.comment.delete({
       where: {
         id: parseInt(commentId),
