@@ -5,7 +5,7 @@ export const createComment = async (req: Request, res: Response) => {
   try {
     const { text } = req.body;
     const { postId } = req.params;
-    const authorId = req.user!.id;
+    const authorId = req.user?.id;
     if (!authorId) {
       return res
         .status(401)
