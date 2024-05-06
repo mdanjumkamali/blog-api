@@ -12,8 +12,8 @@ const router = Router();
 
 router.post("/create-post", authMiddleware, createPost);
 router.get("/all-posts", getAllPosts);
-router.get("/:id", getPostById);
-router.patch("/update-post/:id", authMiddleware, updatePost);
-router.delete("/delete-post/:id", authMiddleware, deletePost);
+router.get("/:postId", getPostById);
+router.patch("/:postId", authMiddleware, updatePost);
+router.delete("/:postId", authMiddleware, deletePost);
 
 export default router;

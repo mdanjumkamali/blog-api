@@ -43,11 +43,11 @@ export const getAllPosts = async (req: Request, res: Response) => {
 
 export const getPostById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { postId } = req.params;
 
     const post = await prismaClient.post.findUnique({
       where: {
-        id: parseInt(id),
+        id: parseInt(postId),
       },
     });
 
@@ -62,7 +62,7 @@ export const getPostById = async (req: Request, res: Response) => {
 
 export const updatePost = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { postId } = req.params;
     const { title, content } = req.body;
     const authorId = req.user?.id;
     if (!authorId) {
@@ -72,7 +72,7 @@ export const updatePost = async (req: Request, res: Response) => {
     }
     const post = await prismaClient.post.findUnique({
       where: {
-        id: parseInt(id),
+        id: parseInt(postId),
       },
     });
 
@@ -88,7 +88,7 @@ export const updatePost = async (req: Request, res: Response) => {
 
     const updatedPost = await prismaClient.post.update({
       where: {
-        id: parseInt(id),
+        id: parseInt(postId),
       },
       data: {
         title,
@@ -104,7 +104,7 @@ export const updatePost = async (req: Request, res: Response) => {
 
 export const deletePost = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { postId } = req.params;
     const authorId = req.user?.id;
 
     if (!authorId) {
@@ -115,7 +115,7 @@ export const deletePost = async (req: Request, res: Response) => {
 
     const post = await prismaClient.post.findUnique({
       where: {
-        id: parseInt(id),
+        id: parseInt(postId),
       },
     });
 
@@ -131,7 +131,7 @@ export const deletePost = async (req: Request, res: Response) => {
 
     await prismaClient.post.delete({
       where: {
-        id: parseInt(id),
+        id: parseInt(postId),
       },
     });
 
