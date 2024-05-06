@@ -19,7 +19,9 @@ export const authMiddleware = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies.authToken;
+    const token =
+      req.cookies?.authToken ||
+      req.header("Authorization")?.replace("Bearer ", "");
     if (!token) {
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
