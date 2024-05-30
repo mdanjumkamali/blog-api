@@ -11,12 +11,16 @@ export const createComment = async (req: Request, res: Response) => {
         .status(401)
         .json({ message: "Unauthorized: User not logged in." });
     }
+    const userName = await prismaClient.user.findUnique({
+      where: { id: authorId },
+    });
 
     const comment = await prismaClient.comment.create({
       data: {
         text,
         authorId,
         postId: parseInt(postId),
+        authorName: userName?.name,
       },
     });
 

@@ -17,12 +17,17 @@ export const createPost = async (req: Request, res: Response) => {
         .json({ message: "Unauthorized: User not logged in." });
     }
 
+    const userName = await prismaClient.user.findUnique({
+      where: { id: authorId },
+    });
+
     // Create the post
     const post = await prismaClient.post.create({
       data: {
         title,
         content,
         authorId,
+        authorName: userName?.name,
       },
     });
 
